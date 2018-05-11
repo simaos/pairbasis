@@ -30,12 +30,17 @@
         {
             clearPersons();
             if (persons.length == 0) {
-                appendPerson('No persons found matching your search.');
+                appendPerson('No persons found with country NL.');
                 return;
             }
+            var searchText = $('#SearchText').val();
             $.each(persons, function (key, person) {
-                appendPerson(person);
+                if (person.toLowerCase().indexOf(searchText.toLowerCase()) != -1)
+                    appendPerson(person);
             });
+            if ($('#persons').has("li").length === 0) {
+                showFail('No NL based names matched your search text');
+            }
         }
 
         function showFail(err)
