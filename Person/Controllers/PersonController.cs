@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.IO;
 
 namespace Person.Controllers
 {
@@ -11,6 +12,7 @@ namespace Person.Controllers
     {
         public IEnumerable<string> GetAllPersons()
         {
+            //File.ReadAllLines("persons.txt");
             return new[] { "Simao", "Ronald", "Jan", "Karel" };
         }
     }

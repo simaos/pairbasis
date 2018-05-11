@@ -8,8 +8,51 @@
     <h1>Person Search</h1>
     <p>
         <input type="text" id="SearchText" />
-        <button>Search</button>
+        <button onclick="searchPersons()">Search</button>
     </p>
-    <div id="results"></div>
+    <ul id="persons"></ul>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        function searchPersons()
+        {
+            clearPersons();
+            appendPerson('Reading names.......');
+            $.getJSON('api/person/GetAllPersons')
+                .done(function (persons) {
+                    showPersons(persons);
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    showFail(err);
+                });
+        }
+
+        function showPersons(persons)
+        {
+            clearPersons();
+            if (persons.length == 0) {
+                appendPerson('No persons found matching your search.');
+                return;
+            }
+            $.each(persons, function (key, person) {
+                appendPerson(person);
+            });
+        }
+
+        function showFail(err)
+        {
+            clearPersons();
+            appendPerson('Search Failed: ' + err);
+        }
+
+        function clearPersons()
+        {
+            $('#persons').empty();
+        }
+
+        function appendPerson(person)
+        {
+            $('<li>', { text: person }).appendTo($('#persons'));
+        }
+    </script>
 </body>
 </html>
