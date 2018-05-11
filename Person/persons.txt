@@ -6,3 +6,5 @@ Ronald Jansen,NL
 Thomas de Jong,NL
 Anna Visser,NL
 Peter Jones,UK 
+Gerard Joling,NL
+Johannes Heesters,NL
